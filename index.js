@@ -13,7 +13,7 @@ function startGame() {
   gameOver = false;
   moves = [];
   document.getElementById('turnIndicator').innerText = `Player ${currentPlayer}'s turn`;
-  document.getElementById('gameResult').innerText = `Board Size: ${boardSize}x${boardSize} | Mode: ${gameMode}`;
+  //document.getElementById('gameResult').innerText = `Board Size: ${boardSize}x${boardSize} | Mode: ${gameMode}`;
   document.getElementById('replayButton').disabled = true;
   createBoard();
 }
@@ -99,7 +99,7 @@ function saveGameHistory(result) {
 
 function updateHistoryDropdown() {
   const historyDropdown = document.getElementById('history');
-  historyDropdown.innerHTML = gameHistory.map((game, index) => `<option value="${index}">Game ${index + 1}: ${game.result}</option>`).join('');
+  historyDropdown.innerHTML = gameHistory.map((game, index) => `<option value="${index}">Game ${index + 1}: ${game.result} wins</option>`).join('');
 }
 
 function loadGameHistory(index) {
@@ -111,7 +111,6 @@ function loadGameHistory(index) {
   currentPlayer = 'X';
   gameOver = false;
   createBoard();
-  replayMatch();
 }
 
 function replayMatch() {
@@ -128,19 +127,4 @@ function replayMatch() {
     document.querySelector(`#board > :nth-child(${row * boardSize + col + 1})`).innerText = player;
     i++;
   }, 500);
-}
-
-function restartGame() {
-  gameOver = false;
-  currentPlayer = 'X';
-  moves = [];
-  document.getElementById('turnIndicator').innerText = `Player ${currentPlayer}'s turn`;
-  document.getElementById('gameResult').innerText = '';
-  document.getElementById('replayButton').disabled = true;
-  createBoard();
-}
-
-function newGame() {
-  boardSize = parseInt(document.getElementById('boardSize').value);
-  restartGame();
 }
