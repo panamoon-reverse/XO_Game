@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="gameContainer">
+      <h1>XO Game</h1>
+      <label for="boardSize">Board Size:</label>
+      <input type="number" id="boardSize" value="3" min="3" max="10" />
+      <button onclick="startGame()">Start Game</button>
+      <br /><br />
+      <label>Game Mode : </label>
+      <select id="mode">
+        <option value="2 Players">2 Players</option>
+        <option value="AI">Vs AI</option>
+      </select>
+      <br /><br />
+      <button onclick="restartGame()">Restart</button>
+      <button onclick="newGame()">New Game</button>
+      <br /><br />
+      <select id="history" onchange="loadGameHistory(this.value)"></select>
+      <button id="replayButton" onclick="replayMatch()" disabled>Replay</button>
+      <div id="board"></div>
+      <p id="turnIndicator"></p>
+      <p id="gameResult"></p>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
