@@ -1,10 +1,10 @@
-let currentPlayer = 'X';  // ผู้เล่นคนแรกเป็น X
-let boardSize = 3;        // ขนาดตารางเริ่มต้น
-let board = [];           // ตารางเกม
-let gameMode = '2 Players';  // โหมดเกมเริ่มต้น
-let moves = [];           // การเคลื่อนไหวของเกม
-let gameHistory = [];     // ประวัติการเล่น
-let gameOver = false;     // สถานะของเกม
+let currentPlayer = 'X'; 
+let boardSize = 3;        
+let board = [];           
+let gameMode = '2 Players';  
+let moves = [];           
+let gameHistory = [];     
+let gameOver = false;     
 
 function startGame() {
   boardSize = parseInt(document.getElementById('boardSize').value);
@@ -13,7 +13,6 @@ function startGame() {
   gameOver = false;
   moves = [];
   document.getElementById('turnIndicator').innerText = `Player ${currentPlayer}'s turn`;
-  //document.getElementById('gameResult').innerText = `Board Size: ${boardSize}x${boardSize} | Mode: ${gameMode}`;
   document.getElementById('replayButton').disabled = true;
   createBoard();
 }
@@ -65,16 +64,12 @@ function handleCellClick(cell, row, col) {
 }
 
 function checkWinner(row, col) {
-  // ตรวจสอบแถว
   if (board[row].every(cell => cell === currentPlayer)) return true;
 
-  // ตรวจสอบคอลัมน์
   if (board.every(rowArray => rowArray[col] === currentPlayer)) return true;
 
-  // ตรวจสอบแนวทแยงหลัก
   if (row === col && board.every((rowArray, idx) => rowArray[idx] === currentPlayer)) return true;
 
-  // ตรวจสอบแนวทแยงรอง
   if (row + col === boardSize - 1 && board.every((rowArray, idx) => rowArray[boardSize - 1 - idx] === currentPlayer)) return true;
 
   return false;
