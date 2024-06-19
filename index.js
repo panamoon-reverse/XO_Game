@@ -8,6 +8,10 @@ let gameOver = false;
 
 function startGame() {
   boardSize = parseInt(document.getElementById('boardSize').value);
+  if(boardSize<3 || boardSize > 10){
+    alert("Please enter a value between 3 and 10.");
+    return;
+  }
   gameMode = document.getElementById('mode').value;
   currentPlayer = 'X';
   gameOver = false;
@@ -30,13 +34,13 @@ function createBoard() {
       const cell = document.createElement('div');
       cell.className = 'cell';
       cell.textContent = board[row][col];
-      cell.addEventListener('click', () => handleCellClick(cell, row, col));
+      cell.addEventListener('click', () => cellClick(cell, row, col));
       boardElement.appendChild(cell);
     }
   }
 }
 
-function handleCellClick(cell, row, col) {
+function cellClick(cell, row, col) {
   if (gameOver || cell.innerText) return;
 
   board[row][col] = currentPlayer;
@@ -84,17 +88,17 @@ function makeAIMove() {
   }
 
   const move = availableMoves[Math.floor(Math.random() * availableMoves.length)];
-  handleCellClick(document.querySelector(`#board > :nth-child(${move.row * boardSize + move.col + 1})`), move.row, move.col);
+  cellClick(document.querySelector(`#board > :nth-child(${move.row * boardSize + move.col + 1})`), move.row, move.col);
 }
 
 function saveGameHistory(result) {
-  gameHistory.push({ result, moves: [...moves], boardSize, gameMode });
+  gameHistory.push({ result, moves: moves.slice(), boardSize, gameMode });
   updateHistoryDropdown();
 }
 
 function updateHistoryDropdown() {
   const historyDropdown = document.getElementById('history');
-  historyDropdown.innerHTML = gameHistory.map((game, index) => `<option value="${index}">Game ${index + 1}: ${game.result} wins</option>`).join('');
+  historyDropdown.innerHTML = gameHistory.map((game, index) => `<option value="${index}">Game ${index + 1}: ${game.result}</option>`).join('');
 }
 
 function loadGameHistory(index) {
