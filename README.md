@@ -1,5 +1,3 @@
-# XO_Game
-
 # วิธี Setup
 - clone Project
 # วิธี run program
